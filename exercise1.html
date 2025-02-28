@@ -1,0 +1,39 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+<title>Lab5 - Exercise 1</title> 
+</head> 
+<body> 
+<input type="text" id="textInput" placeholder="Type something 
+here..."/> 
+<label id="textLabel"></label> 
+<button id="redButton">Red</button> 
+<button id="blueButton">Blue</button> 
+<button id="greenButton">Green</button> 
+<button id="orangeButton">Orange</button> 
+<button id="purpleButton">Purple</button> 
+</body> 
+<script type="text/javascript"> 
+<!-- Your JavaScript code will go here --> 
+// Event listener for the textbox to detect 'Enter' key press
+textInput.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+        textLabel.textContent = textInput.value; // Update label text
+        textInput.value = ''; // Clear textbox
+    }
+});
+
+// Function to change label color
+const changeLabelColor = (color) => {
+    textLabel.style.color = color;
+};
+
+// Adding event listeners to buttons
+redButton.addEventListener('click', () => changeLabelColor('red'));
+blueButton.addEventListener('click', () => changeLabelColor('blue'));
+greenButton.addEventListener('click', () => changeLabelColor('green'));
+orangeButton.addEventListener('click', () => changeLabelColor('orange'));
+purpleButton.addEventListener('click', () => changeLabelColor('purple'));
+
+</script> 
+</html>

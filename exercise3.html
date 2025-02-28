@@ -1,0 +1,62 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+<title>Lab5 - Exercise 3</title> 
+</head> 
+<body> 
+<input type="text" id="textInput" placeholder="Enter a user number (1-30)"/> 
+<label id="textLabel"></label> 
+<button id="redButton">Red</button> 
+<button id="blueButton">Blue</button> 
+<button id="greenButton">Green</button> 
+<button id="orangeButton">Orange</button> 
+<button id="purpleButton">Purple</button> 
+</body> 
+<script type="text/javascript"> 
+<!-- Your JavaScript code will go here --> 
+// Event listener for the textbox to detect 'Enter' key press
+textInput.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+        retrieveData(textInput.value);
+       // textLabel.textContent = textInput.value; 
+       // Commented out because text is replaced by retrieveData.
+        textInput.value = ''; // Clear textbox
+    }
+});
+
+// Function to change label color
+const changeLabelColor = (color) => {
+    textLabel.style.color = color;
+};
+
+// Adding event listeners to buttons
+redButton.addEventListener('click', () => changeLabelColor('red'));
+blueButton.addEventListener('click', () => changeLabelColor('blue'));
+greenButton.addEventListener('click', () => changeLabelColor('green'));
+orangeButton.addEventListener('click', () => changeLabelColor('orange'));
+purpleButton.addEventListener('click', () => changeLabelColor('purple'));
+
+async function retrieveData(userID) {
+    try {
+        const response = await fetch('https://67c1f94561d8935867e4ea82.mockapi.io/users_api');
+        const users = await response.json();
+        const userContainer = document.getElementById('textLabel');
+        let foundID = false;
+        users.forEach((user) => {
+            if (user.id == userID){
+                userContainer.textContent = "ID: " + user.id + ", Name: " + user.first_name + ", Group: " + user.user_group;
+                foundID = true;
+            }
+        });
+        if (foundID == false){
+            userContainer.textContent = "No users were found with the provided User_ID.";
+        }
+        
+    }
+    catch(error){
+        console.error('Error fetching data', error);
+    }
+}
+
+</script> 
+</html>
